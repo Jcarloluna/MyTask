@@ -1,0 +1,9 @@
+@import './utils';
+
+.container {
+    @include flexDiv(column, center, space-around);
+    height: auto;
+    min-height: 80vh;
+    border-bottom:black 2px solid;
+    width: 100%;
+}

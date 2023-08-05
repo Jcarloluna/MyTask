@@ -1,0 +1,10 @@
+@import './utils';
+
+.container {
+    @include flexDiv(row, center, center);
+    height: 80px;
+    border-bottom:black 2px solid;
+    width: 100%;
+}
+
+

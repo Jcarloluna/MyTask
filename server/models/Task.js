@@ -6,10 +6,7 @@ const TaskSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ["On Going", "Not Started", "Finished"],
-  },
-  password: {
-    type: String,
+    enum: ["Not Started", "In Progress", "Completed"],
   },
   userId: {
     type: mongoose.Schema.Types.ObjectId,
