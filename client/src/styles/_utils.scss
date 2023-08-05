@@ -1,8 +1,53 @@
-
 // mixins
+
 @mixin flexDiv($direction, $alignItem, $justifyContent) {
-    display: flex;
-    flex-direction: $direction;
-    align-items: $alignItem;
-    justify-content: $justifyContent;
+  display: flex;
+  flex-direction: $direction;
+  align-items: $alignItem;
+  justify-content: $justifyContent;
+}
+
+@mixin boxShadow {
+  box-shadow: 2px 2px 4px 1px rgba(0, 0, 0, 0.3);
+}
+
+@mixin button1($width: 100px, $height: 50px) {
+  background-color: red;
+  color: white;
+  font-size: 12px;
+  width: $width;
+  height: $height;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-3px);
+    transition: 0.2s;
+    @include boxShadow;
+  }
+}
+
+@mixin button2($width: 100px, $height: 50px) {
+  background-color: #ffffff;
+  color: #176b87;
+  width: $width;
+  height: $height;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  &:hover {
+    transform: translateY(-2px);
+    transition: 0.2s;
+    @include boxShadow;
+  }
+ 
+}
+
+@mixin card($height: auto, $width: 220px, $bgcolor: white) {
+  background-color: $bgcolor;
+  height: $height;
+  width: $width;
+  border-radius: 10px;
+  @include boxShadow;
 }

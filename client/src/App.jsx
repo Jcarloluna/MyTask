@@ -1,8 +1,11 @@
-import { Header } from "./components/header";
-import { Hero } from "./components/hero";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Header } from "./components/Header";
+import { Dashboard } from "./pages/Dashboard";
+import { Home } from "./pages/Home";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import "./styles/index.scss";
 import React, { Fragment } from "react";
+import NotFound from "./pages/404";
 
 const client = new ApolloClient({
   uri: "http://localhost:8000/graphql",
@@ -13,8 +16,14 @@ function App() {
   return (
     <Fragment>
       <ApolloProvider client={client}>
-        <Header />
-        <Hero />
+        <Router>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Home/>}/>
+            <Route path="/dashboard" element={<Dashboard/>}/>
+            <Route path="*" element={<NotFound/>} />
+          </Routes>
+        </Router>
       </ApolloProvider>
     </Fragment>
   );

@@ -2,9 +2,20 @@
 
 .container {
     @include flexDiv(row, center, center);
-    height: 80px;
-    border-bottom:black 2px solid;
+    height: 60px;
+    @include boxShadow;
     width: 100%;
+    background-color: #FFF;
+    
+    .navBar{
+        @include flexDiv(row, center, space-between);
+        width: 80%;
+        flex-wrap: wrap;
+        color:#111;
+        .button{
+            @include button1(70px,30px);
+        }
+    }
 }
 
 
