@@ -1,8 +1,14 @@
 import { createSlice, configureStore } from "@reduxjs/toolkit";
+import { TASK_STATUS_OPTIONS } from "../constants/tasks";
+
+// Set the initial value of task status option to the key of 'To do' 
+const TODO = Object.keys(TASK_STATUS_OPTIONS).find(
+  (key) => TASK_STATUS_OPTIONS[key] === "To do"
+);
 
 const initialFormState = {
   taskTitle: "",
-  taskStatus: "",
+  taskStatus: TODO,
   taskId: null,
 };
 
@@ -26,7 +32,7 @@ const formTaskSlice = createSlice({
     },
     clearForm: (state) => {
       state.taskTitle = "";
-      state.taskStatus = "";
+      state.taskStatus = TODO;
       state.taskId = null;
     },
   },
@@ -39,9 +45,9 @@ const taskModalSlice = createSlice({
     toggleTaskModal(state, action) {
       state.showModal = action.payload;
     },
-    setModalType(state, action){
+    setModalType(state, action) {
       state.modalType = action.payload;
-    }
+    },
   },
 });
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "../styles/modal.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { taskModalActions, formTaskActions } from "../store";
@@ -11,10 +11,13 @@ export const Modal = (props) => {
   const { taskTitle, taskStatus, taskId } = useSelector(
     (state) => state.formTask
   );
+  useEffect(() => {
+    console.log("from rtk", taskTitle, taskStatus, taskId);
+  }, [taskTitle, taskStatus, taskId]);
   const modalType = useSelector((state) => state.taskModal.modalType);
   const { addTask } = useAddTaskMutation(userId, taskTitle, taskStatus);
 
-  const { updateTask } = useUpdateTaskMutation(taskId, taskTitle, taskStatus);
+  const { updateTask } = useUpdateTaskMutation();
   const dispatch = useDispatch();
 
   const handleCloseModal = () => {
@@ -28,7 +31,7 @@ export const Modal = (props) => {
       updateTask();
     }
     if (modalType === MODAL_TYPE.ADD) {
-      addTask();
+      addTask(userId, taskTitle, taskStatus);
     }
 
     dispatch(formTaskActions.clearForm());
