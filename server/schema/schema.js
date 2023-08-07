@@ -13,7 +13,7 @@ const {
   GraphQLEnumType,
 } = require("graphql");
 
-// Todos Type
+// TO DOs Type
 
 const TaskType = new GraphQLObjectType({
   name: "Tasks",
@@ -123,12 +123,12 @@ const mutation = new GraphQLObjectType({
           type: new GraphQLEnumType({
             name: "TaskStatus",
             values: {
-              new: { value: "Not Started" },
-              progress: { value: "In Progress" },
-              finished: { value: "Completed" },
+              TO_DO: { value: "To do" },
+              IN_PROGRESS: { value: "In Progress" },
+              COMPLETED: { value: "Completed" },
             },
           }),
-          defaultValue: "Not Started",
+          defaultValue: "To do",
         },
         userId: { type: new GraphQLNonNull(GraphQLID) },
       },
@@ -156,9 +156,9 @@ const mutation = new GraphQLObjectType({
           type: new GraphQLEnumType({
             name: "TaskStatusUpdate",
             values: {
-              new: { value: "Not Started" },
-              progress: { value: "In Progress" },
-              finished: { value: "Completed" },
+              TO_DO: { value: "To do" },
+              IN_PROGRESS: { value: "In Progress" },
+              COMPLETED: { value: "Completed" },
             },
           }),
         },

@@ -1,25 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../styles/dashboard.module.scss";
 import { useGetTasksQuery } from "../hooks/useGetTasksQuery";
 import { TaskCard } from "../components/Card";
-
+import { Modal } from "../components/Modal";
+import { useDispatch, useSelector } from "react-redux";
+import { formTaskActions, taskModalActions } from "../store/index";
 
 export const Dashboard = () => {
+  const showModal = useSelector((state) => state.taskModal.showModal);
   const { loading, error, data } = useGetTasksQuery();
-  console.log(data);
+
   return (
-    <div className={styles.container}>
-      <div className={styles.title}>
-        {error && <h1> Failed to fetch tasks</h1>}
-        {loading && <h1>Loading Tasks...</h1>}
-        {data && <h1>Tasks List</h1>}
+    <>
+      <div className={styles.container}>
+        <div className={styles.title}>
+          {error && <h1> Failed to fetch tasks</h1>}
+          {loading && <h1>Loading Tasks...</h1>}
+          {data && <h1>Tasks List</h1>}
+        </div>
+        <div className={styles.cardContainer}>
+          {data &&
+            data.tasks.map((task) => {
+              return (
+                <TaskCard
+                  key={task.id}
+                  task={task}
+                />
+              );
+            })}
+        </div>
       </div>
-      <div className={styles.cardContainer}>
-        {data &&
-          data.tasks.map((task) => {
-            return <TaskCard key={task.id} task={task} />;
-          })}
-      </div>
-    </div>
+      {showModal && <Modal modalTitle={"Update Task"} />}
+    </>
   );
 };

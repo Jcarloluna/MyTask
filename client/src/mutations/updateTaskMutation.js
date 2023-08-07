@@ -1,8 +1,12 @@
 import { gql } from "@apollo/client";
 
-export const GET_TASKS = gql`
-  query getTasks {
-    tasks {
+export const UPDATE_TASK = gql`
+  mutation updateTask(
+    $id: ID!
+    $taskTitle: String!
+    $status: TaskStatusUpdate!
+  ) {
+    updateTask(id: $id, taskTitle: $taskTitle, status: $status) {
       id
       taskTitle
       status
@@ -12,4 +16,3 @@ export const GET_TASKS = gql`
     }
   }
 `;
-
