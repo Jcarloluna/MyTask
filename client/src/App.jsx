@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { Header } from "./components/Header";
+import { Navbar } from "./components/Navbar";
 import { Dashboard } from "./pages/Dashboard";
 import { Home } from "./pages/Home";
 import { Provider } from "react-redux";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
-import "./styles/index.scss";
+import "./styles/index.css";
 import React, { Fragment } from "react";
 import NotFound from "./pages/404";
 import store from "./store/index";
@@ -20,7 +20,7 @@ function App() {
       <ApolloProvider client={client}>
         <Provider store={store}>
           <Router>
-            <Header />
+            <Navbar />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/dashboard" element={<Dashboard />} />

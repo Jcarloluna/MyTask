@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "../styles/dashboard.module.scss";
 import { formTaskActions, taskModalActions } from "../store";
 import { useDispatch, useSelector } from "react-redux";
 import { useUpdateTaskMutation } from "../hooks/useUpdateTaskMutation";
@@ -26,7 +25,7 @@ export const TaskCard = ({ task }) => {
 
   return (
     <>
-      <div className={styles.card}>
+      <div className={''}>
         <h4 style={{ textTransform: "capitalize" }}>
           {task.user && task.user.userName !== null
             ? task.user.userName
@@ -36,11 +35,11 @@ export const TaskCard = ({ task }) => {
         <h3>{task.taskTitle}</h3>
         <h3>{task.status}</h3>
         <hr></hr>
-        <div className={styles.cardActionsContainer}>
-          <button className={styles.cardActions} onClick={handleEditTask}>
+        <div className={''}>
+          <button className={''} onClick={handleEditTask}>
             Edit
           </button>
-          <button className={styles.cardActions}>Delete</button>
+          <button className={''}>Delete</button>
         </div>
       </div>
     </>

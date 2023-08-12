@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import styles from "../styles/modal.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { taskModalActions, formTaskActions } from "../store";
 import { useUpdateTaskMutation } from "../hooks/useUpdateTaskMutation";
@@ -56,17 +55,17 @@ export const Modal = (props) => {
   };
 
   return (
-    <div className={styles.modalBackdrop} onClick={handleCloseModal}>
-      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-        <div className={styles.modalContent}>
-          <div className={styles.modalHeader}>
-            <h3 className={styles.modalTitle}>{props.modalTitle}</h3>
-            <span onClick={handleCloseModal} className={styles.modalClose}>
+    <div className={''} onClick={handleCloseModal}>
+      <div className={''} onClick={(e) => e.stopPropagation()}>
+        <div className={''}>
+          <div className={''}>
+            <h3 className={''}>{props.modalTitle}</h3>
+            <span onClick={handleCloseModal} className={''}>
               &times;
             </span>
           </div>
           <form onSubmit={handleSubmit}>
-            <div className={styles.modalBody}>
+            <div className={''}>
               <div>
                 <label htmlFor="taskTitle">Task Title:</label>
                 <input
@@ -93,13 +92,13 @@ export const Modal = (props) => {
                 </select>
               </div>
             </div>
-            <div className={styles.modalFooter}>
-              <button type={"submit"} className={styles.btn}>
+            <div className={''}>
+              <button type={"submit"} className={''}>
                 Save
               </button>
               <button
                 type="button"
-                className={`${styles.btn} ${styles.modalClose}`}
+                className={`${''} ${''}`}
                 onClick={handleCloseModal}
               >
                 Close

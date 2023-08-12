@@ -21,8 +21,10 @@ const TaskType = new GraphQLObjectType({
     // Convert the MongoDB ObjectId to GraphQL ID
     id: { type: GraphQLID },
     taskTitle: { type: GraphQLString },
+    taskDescription: { type: GraphQLString },
     status: { type: GraphQLString },
-    password: { type: GraphQLString },
+    priority: { type: GraphQLString },
+    dateCreated: { type: GraphQLString },
     user: {
       type: UserType,
       resolve(parent, args) {
@@ -119,29 +121,46 @@ const mutation = new GraphQLObjectType({
       type: TaskType,
       args: {
         taskTitle: { type: new GraphQLNonNull(GraphQLString) },
+        taskDescription: { type: new GraphQLNonNull(GraphQLString) },
         status: {
           type: new GraphQLEnumType({
             name: "TaskStatus",
             values: {
-              TO_DO: { value: "To do" },
+              TO_DO: { value: "Not Started" },
               IN_PROGRESS: { value: "In Progress" },
               COMPLETED: { value: "Completed" },
             },
           }),
-          defaultValue: "To do",
+          defaultValue: "Not Started",
+        },
+        priority: {
+          type: new GraphQLEnumType({
+            name: "TaskPriority",
+            values: {
+              LOW: { value: "Low Priority" },
+              MID: { value: "Mid Priority" },
+              HIGH: { value: "High Priority" },
+            },
+          }),
+          defaultValue: "Low Priority",
         },
         userId: { type: new GraphQLNonNull(GraphQLID) },
       },
       async resolve(parent, args) {
         const task = new Task({
           taskTitle: args.taskTitle,
+          taskDescription: args.taskDescription,
           status: args.status,
+          priority: args.priority,
           userId: args.userId,
         });
+        console.log("task:", task);
         try {
           const savedTask = await task.save();
-          return savedTask; // Return the saved user object
+          console.log("[savedTask]:", savedTask);
+          return savedTask;
         } catch (error) {
+          console.log("error:---", error);
           throw new Error("Failed to create a new task.");
         }
       },
@@ -152,13 +171,24 @@ const mutation = new GraphQLObjectType({
       args: {
         id: { type: new GraphQLNonNull(GraphQLID) },
         taskTitle: { type: GraphQLString },
+        taskDescription: { type: GraphQLString },
         status: {
           type: new GraphQLEnumType({
             name: "TaskStatusUpdate",
             values: {
-              TO_DO: { value: "To do" },
+              TO_DO: { value: "Not Started" },
               IN_PROGRESS: { value: "In Progress" },
               COMPLETED: { value: "Completed" },
+            },
+          }),
+        },
+        priority: {
+          type: new GraphQLEnumType({
+            name: "TaskPriorityUpdate",
+            values: {
+              LOW: { value: "Low Priority" },
+              MID: { value: "Mid Priority" },
+              HIGH: { value: "High Priority" },
             },
           }),
         },
@@ -169,7 +199,10 @@ const mutation = new GraphQLObjectType({
           {
             $set: {
               taskTitle: args.taskTitle,
+              taskDescription: args.taskDescription,
               status: args.status,
+              priority: args.priority,
+              dateCreated: args.dateCreated,
             },
           },
           { new: true } // Returns the updated document -- prop of findByIdAndUpdate

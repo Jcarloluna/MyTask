@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import styles from "../styles/dashboard.module.scss";
 import { useGetTasksQuery } from "../hooks/useGetTasksQuery";
 import { TaskCard } from "../components/Card";
 import { Modal } from "../components/Modal";
@@ -12,13 +11,13 @@ export const Dashboard = () => {
 
   return (
     <>
-      <div className={styles.container}>
-        <div className={styles.title}>
+      <div className={''}>
+        <div className={''}>
           {error && <h1> Failed to fetch tasks</h1>}
           {loading && <h1>Loading Tasks...</h1>}
           {data && <h1>Tasks List</h1>}
         </div>
-        <div className={styles.cardContainer}>
+        <div className={''}>
           {data &&
             data.tasks.map((task) => {
               return (
