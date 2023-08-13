@@ -1,9 +1,18 @@
 import React from "react";
+import { Hero } from "../components/Hero";
+import { Benefits } from "../components/Benefits";
+import { Quote } from "../components/Quote";
+import { Features } from "../components/Features";
+import { Footer } from "../components/Footer";
 
 export const Home = () => {
   return (
-    <div className="mt-24">
-      <h1>2</h1>
-    </div>
+    <>
+      <Hero />
+      <Benefits />
+      <Quote />
+      <Features />
+      <Footer />
+    </>
   );
 };

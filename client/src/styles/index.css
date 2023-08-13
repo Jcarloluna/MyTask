@@ -22,26 +22,29 @@
   }
 
   h1 {
-    @apply text-4xl md:text-5xl lg:text-[64px] font-bold text-shadow tracking-wide ; 
+    @apply text-5xl md:text-6xl lg:text-[68px] font-bold text-shadow tracking-wide;
   }
   h2 {
-    @apply text-3xl lg:text-4xl;
+    @apply text-3xl md:text-4xl lg:text-5xl;
   }
 
   h3 {
-    @apply text-xl lg:text-2xl;
+    @apply text-xl md:text-2xl lg:text-3xl;
   }
 
   h4 {
-    @apply text-lg lg:text-xl;
+    @apply text-lg md:text-xl lg:text-2xl;
+  }
+  h5 {
+    @apply text-base md:text-lg lg:text-xl;
   }
 
   p {
-    @apply lg:text-[16px] sm:text-[15px] text-[14px] px-2 overflow-clip;
+    @apply lg:text-[24px] sm:text-[20px] text-[16px] px-2 overflow-clip;
   }
 
   button {
-    @apply rounded-[25px] tracking-wider text-white hover:-translate-y-1 duration-100 bg-mainLightBlue font-bold text-2xl py-[10px] px-[20px];
+    @apply rounded-[25px] tracking-wider text-white hover:-translate-y-1 duration-100 bg-mainLightBlue font-bold text-xl py-[10px] px-[20px];
   }
 }
 
@@ -69,17 +72,12 @@ body {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #ffffff00;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #176b87;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #001c30;
+  background: #00adb5;
 }
 
 .text-shadow {
