@@ -5,7 +5,7 @@ import benjamin from "../assets/quote/benjamin.svg";
 export const Quote = () => {
   return (
     <div className="min-h-[600px] h-auto bg-mainGray">
-      <div className="flex px-[20px] sm:px-[40px] lg:px-[80px] py-[120px] flex-wrap justify-center items-center gap-12 md:gap-40">
+      <div className="flex px-[40px] sm:px-[80px] lg:px-[160px] py-[120px] flex-wrap justify-center items-center gap-12 md:gap-40">
         <div>
           <img src={benjamin} alt="benjamin" />
         </div>

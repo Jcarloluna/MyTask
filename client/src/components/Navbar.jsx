@@ -1,19 +1,38 @@
 import React from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, NavLink } from "react-router-dom";
 import { Link as ReactLink } from "react-scroll";
 import { useSelector, useDispatch } from "react-redux";
 import { formTaskActions, taskModalActions } from "../store";
 import { MODAL_TYPE } from "../constants/tasks";
+import { useState, useEffect } from "react";
+import { FaBarsStaggered, FaXmark } from "react-icons/fa6";
 
 export const Navbar = () => {
   const dispatch = useDispatch();
   const path = useLocation();
   const navigate = useNavigate();
   const isDashboard = path.pathname == "/dashboard";
+  const [isBurger, setIsBurger] = useState(false);
+  const [shadow, setShadow] = useState(false);
 
   const handleStart = () => {
     navigate("/dashboard");
   };
+
+  const handleBurgerClick = () => {
+    setIsBurger(!isBurger);
+  };
+
+  useEffect(() => {
+    const handleShadow = () => {
+      if (window.scrollY >= 75) {
+        setShadow(true);
+      } else {
+        setShadow(false);
+      }
+    };
+    window.addEventListener("scroll", handleShadow);
+  }, []);
 
   const handleSignout = () => {
     navigate("/");
@@ -21,40 +40,156 @@ export const Navbar = () => {
 
   const linkStyles = isDashboard
     ? `hidden`
-    : `text-[18px] text-center font-bold text-mainDarkBlue 
-  hover:text-mainLightBlue duration-100 cursor-pointer tracking-wide`;
+    : `text-center font-bold text-mainDarkBlue 
+  hover:text-mainLightBlue duration-100 cursor-pointer tracking-wider  ${
+    shadow ? "text-[18px]" : "text-[21px]"
+  }`;
 
   return (
     <div
-      className={
-        "flex flex-row justify-between items-center bg-none lg:py-[40px]  px-[20px] sm:px-[40px] lg:px-[80px]"
-      }
+      className={`
+        fixed z-50 duration-300 ease-in-out flex justify-between w-[100%] items-center py-[30px] px-[40px] sm:px-[80px] lg:px-[160px] bg-none
+       ${
+         shadow
+           ? "shadow-xl max-h-[60px] md:max-h-[75px] bg-mainWhite "
+           : "max-h-[150px]"
+       }`}
     >
       <div>
-        <h2 className="text-shadow">
+        <h1
+          className={`text-shadow duration-300 ease-in-out  ${
+            shadow
+              ? "text-[30px] md:text-[35px] lg:text-[40px]"
+              : "text-[40px] md:text-[45px] lg:text-[50px]"
+          }`}
+        >
           My<span className="text-mainLightBlue">Task</span>
-        </h2>
+        </h1>
       </div>
-      <ul className="flex flex-row justify-around items-center gap-[25px]">
-        <li className={linkStyles}>
-          <ReactLink to={"features"} smooth={true} duration={120} offset={0}>
-            Features
-          </ReactLink>
-        </li>
-        <li className={linkStyles}>
-          <Link to={"/about"}>About</Link>
-        </li>
-        <li className={linkStyles}>
-          <Link to={"/sign-in"}>Sign in</Link>
-        </li>
-        {!isDashboard ? (
-          <button onClick={handleStart}>Sign Up</button>
-        ) : path.pathname == "/dashboard" ? (
-          <button onClick={handleSignout}>Sign out</button>
+      <div>
+        <ul className="hidden lg:flex flex-row justify-around items-center gap-[25px]">
+          {path.pathname == "/about" && (
+            <li className={linkStyles}>
+              <NavLink to={"/"}>Home</NavLink>
+            </li>
+          )}
+          <li className={linkStyles}>
+            <ReactLink to={"features"} smooth={true} duration={120} offset={0}>
+              Features
+            </ReactLink>
+          </li>
+          <li className={linkStyles}>
+            <NavLink to={"/about"} target="_blank">
+              About
+            </NavLink>
+          </li>
+          <li className={linkStyles}>
+            <Link to={"/sign-in"}>Sign in</Link>
+          </li>
+          {!isDashboard ? (
+            <NavLink
+              to={"/dashboard"}
+              onClick={handleBurgerClick}
+              className={
+                "rounded-[25px] tracking-wider text-white hover:-translate-y-1 duration-100 bg-mainLightBlue font-bold text-xl py-[10px] px-[20px]"
+              }
+            >
+              Sign Up
+            </NavLink>
+          ) : path.pathname == "/dashboard" ? (
+            <NavLink
+              to={"/"}
+              onClick={handleBurgerClick}
+              className={
+                "rounded-[25px] tracking-wider text-white hover:-translate-y-1 duration-100 bg-mainLightBlue font-bold text-xl py-[10px] px-[20px]"
+              }
+            >
+              Sign out
+            </NavLink>
+          ) : (
+            ""
+          )}
+        </ul>
+      </div>
+      <div
+        className="flex lg:hidden items-center justify-center cursor-pointer"
+        onClick={handleBurgerClick}
+      >
+        {!isBurger ? (
+          <FaBarsStaggered
+            size={shadow ? 35 : 50}
+            title="Navigate"
+            className="text-mainLightBlue duration-300 ease-in-out"
+          />
         ) : (
-          ""
+          <FaXmark
+            size={shadow ? 35 : 50}
+            title="Navigate"
+            className="text-mainLightBlue duration-300 ease-in-out"
+          />
         )}
-      </ul>
+      </div>
+
+      <div
+        className={`lg:hidden duration-500 ease-in-out absolute top-[110px] py-[20px] right-[40px] sm:right-[80px] lg:right-[160px] 
+        rounded-[25px] shadow-2xl border-mainLightBlue border-[2px] list-none bg-mainWhite ${
+          isBurger ? "flex" : " translate-x-[500px] opacity-0"
+        }`}
+      >
+        <div className="flex flex-col justify-start items-center p-[20px] space-y-8 ">
+          {path.pathname == "/about" && (
+            <li className={linkStyles}>
+              <NavLink to={"/"} onClick={handleBurgerClick}>
+                Home
+              </NavLink>
+            </li>
+          )}
+          <li className={linkStyles}>
+            <ReactLink
+              to={"features"}
+              smooth={true}
+              duration={120}
+              offset={0}
+              onClick={handleBurgerClick}
+            >
+              Features
+            </ReactLink>
+          </li>
+          <li className={linkStyles}>
+            <NavLink to={"/about"} target="_blank" onClick={handleBurgerClick}>
+              About
+            </NavLink>
+          </li>
+          <li className={linkStyles}>
+            <Link to={"/sign-in"} onClick={handleBurgerClick}>
+              Sign in
+            </Link>
+          </li>
+          {!isDashboard ? (
+            <NavLink
+              to={"/dashboard"}
+              onClick={handleBurgerClick}
+              className={
+                "rounded-[25px] tracking-wider text-white hover:-translate-y-1 duration-100 bg-mainLightBlue font-bold text-xl py-[10px] px-[20px]"
+              }
+            >
+              Sign Up
+            </NavLink>
+          ) : path.pathname == "/dashboard" ? (
+            <NavLink
+              to={"/"}
+              onClick={handleBurgerClick}
+              className={
+                "rounded-[25px] tracking-wider text-white hover:-translate-y-1 duration-100 bg-mainLightBlue font-bold text-xl py-[10px] px-[20px]"
+              }
+            >
+              Sign out
+            </NavLink>
+          ) : (
+            ""
+          )}
+        </div>
+      </div>
     </div>
   );
 };

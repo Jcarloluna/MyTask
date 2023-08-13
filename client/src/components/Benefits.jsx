@@ -8,7 +8,7 @@ export const Benefits = () => {
     "col-span-3 lg:col-span-1 flex flex-col gap-8 text-center justify-center items-center";
 
   return (
-    <div className="h-auto min-h-[550px] px-[20px] sm:px-[40px] lg:px-[80px] overflow-hidden justify-center flex items-center py-[120px]">
+    <div className="h-auto min-h-[550px] px-[40px] sm:px-[80px] lg:px-[160px] overflow-hidden justify-center flex items-center py-[120px]">
       <div className="grid grid-cols-3 justify-around items-center gap-24">
         <div className={benefitCards}>
           <img src={productivity} alt="productivity" />

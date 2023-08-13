@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Navbar } from "./components/Navbar";
 import { Dashboard } from "./pages/Dashboard";
+import { About } from "./pages/About";
 import { Home } from "./pages/Home";
 import { Provider } from "react-redux";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
@@ -24,6 +25,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/about" element={<About />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Router>

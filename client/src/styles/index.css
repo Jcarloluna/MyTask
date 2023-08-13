@@ -7,10 +7,18 @@
   body {
     @apply bg-mainWhite text-mainDarkBlue;
     font-family: "Poppins", sans-serif;
+    height: 100%;
+    width: 100%;
   }
 
-  section {
-    overflow: hidden;
+  #root {
+    position: absolute;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  background-color: #eeeeee;
   }
 
   h2,
@@ -22,21 +30,21 @@
   }
 
   h1 {
-    @apply text-5xl md:text-6xl lg:text-[68px] font-bold text-shadow tracking-wide;
+    @apply text-4xl sm:text-6xl lg:text-[68px] font-bold text-shadow tracking-wide;
   }
   h2 {
-    @apply text-3xl md:text-4xl lg:text-5xl;
+    @apply text-2xl sm:text-4xl lg:text-5xl;
   }
 
   h3 {
-    @apply text-xl md:text-2xl lg:text-3xl;
+    @apply text-xl sm:text-2xl lg:text-3xl;
   }
 
   h4 {
-    @apply text-lg md:text-xl lg:text-2xl;
+    @apply text-lg sm:text-xl lg:text-2xl;
   }
   h5 {
-    @apply text-base md:text-lg lg:text-xl;
+    @apply text-base sm:text-lg lg:text-xl;
   }
 
   p {
@@ -46,22 +54,6 @@
   button {
     @apply rounded-[25px] tracking-wider text-white hover:-translate-y-1 duration-100 bg-mainLightBlue font-bold text-xl py-[10px] px-[20px];
   }
-}
-
-#root {
-  position: absolute;
-  overflow: hidden;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: auto;
-  background-color: #eeeeee;
-}
-
-body {
-  font-family: "Poppins", sans-serif;
-  height: 100%;
-  width: 100%;
 }
 
 /* Custom Scrollbar */

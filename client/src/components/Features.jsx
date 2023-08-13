@@ -4,19 +4,17 @@ export const Features = () => {
   return (
     <div
       id="features"
-      className=" py-[80px] px-[20px] sm:px-[40px] lg:px-[80px] h-auto flex flex-col space-y-5"
+      className=" pt-[40px] pb-[80px] px-[40px] sm:px-[80px] lg:px-[160px] h-auto flex flex-col space-y-5"
     >
       <div className="flex flex-row justify-start items-center">
         <h2>Key Features</h2>
-        <span className="font-bold text-mainLightBlue text-[120px] ml-10">
+        <span className="font-bold text-mainLightBlue text-[80px] md:text-[120px] ml-10">
           &gt;
         </span>
       </div>
       <div className="flex flex-col space-y-5 justify-start items-center">
         <div className="space-y-2">
-          <h3>
-            Effortless Task Addition
-          </h3>
+          <h3>Effortless Task Addition</h3>
           <p className="p-0 m-0">
             Seamlessly add tasks to your list with just a few taps. Whether it's
             a work assignment, a personal goal, or a shopping list, MyTask makes
@@ -24,9 +22,7 @@ export const Features = () => {
           </p>
         </div>
         <div className="space-y-2">
-          <h3>
-            Priority at Your Fingertips{" "}
-          </h3>
+          <h3>Priority at Your Fingertips </h3>
           <p className="p-0 m-0">
             Tailor your tasks to your needs by setting priority degrees. From
             high-priority tasks that demand immediate attention to low-priority
@@ -42,9 +38,7 @@ export const Features = () => {
           </p>
         </div>
         <div className="space-y-2">
-          <h3>
-            Status Tracking Made Easy
-          </h3>
+          <h3>Status Tracking Made Easy</h3>
           <p className="p-0 m-0">
             Keep track of your tasks' progress effortlessly. Whether they're
             "To-Do," "In Progress," or "Done," MyTask's intuitive status options
