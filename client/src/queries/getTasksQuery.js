@@ -4,12 +4,14 @@ export const GET_TASKS = gql`
   query getTasks {
     tasks {
       id
-      taskTitle
       status
+      taskTitle
+      taskDescription
+      priority
+      dateCreated
       user {
         userName
       }
     }
   }
 `;
-

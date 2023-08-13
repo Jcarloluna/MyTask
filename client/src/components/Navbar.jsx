@@ -6,6 +6,8 @@ import { formTaskActions, taskModalActions } from "../store";
 import { MODAL_TYPE } from "../constants/tasks";
 import { useState, useEffect } from "react";
 import { FaBarsStaggered, FaXmark } from "react-icons/fa6";
+import myTaskLogo from "../assets/myTaskLogo.svg";
+
 
 export const Navbar = () => {
   const dispatch = useDispatch();
@@ -55,9 +57,10 @@ export const Navbar = () => {
            : "max-h-[150px]"
        }`}
     >
-      <div>
+      <div className="flex flex-row justify-center items-center gap-2">
+        <img src={myTaskLogo} alt="MyTaskLogo" className="h-[50px]"/>
         <h1
-          className={`text-shadow duration-300 ease-in-out  ${
+          className={`hidden sm:flex text-shadow duration-300 ease-in-out  ${
             shadow
               ? "text-[30px] md:text-[35px] lg:text-[40px]"
               : "text-[40px] md:text-[45px] lg:text-[50px]"
@@ -84,14 +87,14 @@ export const Navbar = () => {
             </NavLink>
           </li>
           <li className={linkStyles}>
-            <Link to={"/sign-in"}>Sign in</Link>
+            <Link to={"/dashboard"}>Sign in</Link>
           </li>
           {!isDashboard ? (
             <NavLink
               to={"/dashboard"}
               onClick={handleBurgerClick}
               className={
-                "rounded-[25px] tracking-wider text-white hover:-translate-y-1 duration-100 bg-mainLightBlue font-bold text-xl py-[10px] px-[20px]"
+                "rounded-[25px] tracking-wider text-white navlink hover:-translate-y-1 duration-100 bg-mainLightBlue font-bold text-xl py-[10px] px-[20px]"
               }
             >
               Sign Up
@@ -101,7 +104,7 @@ export const Navbar = () => {
               to={"/"}
               onClick={handleBurgerClick}
               className={
-                "rounded-[25px] tracking-wider text-white hover:-translate-y-1 duration-100 bg-mainLightBlue font-bold text-xl py-[10px] px-[20px]"
+                "rounded-[25px] navlink tracking-wider text-white hover:box-shadow hover:-translate-y-1 duration-100 bg-mainLightBlue font-bold text-xl py-[10px] px-[20px]"
               }
             >
               Sign out

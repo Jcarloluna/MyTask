@@ -11,7 +11,7 @@ import NotFound from "./pages/404";
 import store from "./store/index";
 
 const client = new ApolloClient({
-  uri: "http://localhost:8000/graphql",
+  uri: "http://localhost:8080/graphql",
   cache: new InMemoryCache(),
 });
 

@@ -1,5 +1,5 @@
 export const TASK_STATUS_OPTIONS = {
-  TO_DO: "To do",
+  TO_DO: "Not Started",
   IN_PROGRESS: "In Progress",
   COMPLETED: "Completed",
 };

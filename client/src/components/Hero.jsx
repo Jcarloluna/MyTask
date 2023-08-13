@@ -4,11 +4,11 @@ import heroImage from "../assets/hero/heroImage.svg";
 import { useNavigate } from "react-router-dom";
 
 export const Hero = () => {
-    const navigate = useNavigate()
+  const navigate = useNavigate();
 
-    const handleStart = () => {
-        navigate('/dashboard')
-    }
+  const handleStart = () => {
+    navigate("/dashboard");
+  };
 
   return (
     <div className="mt-[140px] lg:mt-[180px] border-b-[65px] border-mainGray h-auto px-[30px] sm:px-[70px] lg:px-[160px] overflow-hidden">
@@ -22,7 +22,10 @@ export const Hero = () => {
             One <span className="text-mainLightBlue text-shadow"> Task </span>{" "}
             at a time.
           </h2>
-          <button className="max-h-[75px] max-w-[270px] tracking-widest w-auto h-auto rounded-[50px]" onClick={handleStart}>
+          <button
+            className="max-h-[75px] max-w-[270px] w-auto h-auto rounded-[25px] tracking-wider text-white hover:-translate-y-1 duration-100 bg-mainLightBlue font-bold text-xl py-[10px] px-[20px]"
+            onClick={handleStart}
+          >
             <h3>Start for free</h3>
           </button>
         </div>
