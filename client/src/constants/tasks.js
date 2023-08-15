@@ -4,6 +4,12 @@ export const TASK_STATUS_OPTIONS = {
   COMPLETED: "Completed",
 };
 
+export const TASK_PRIORITY_OPTIONS = {
+  LOW: "Low Priority",
+  MID: "Mid Priority",
+  HIGH: "High Priority",
+};
+
 export const MODAL_TYPE = {
   ADD: "ADD",
   EDIT: "EDIT",

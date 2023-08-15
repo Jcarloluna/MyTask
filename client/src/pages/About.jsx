@@ -10,7 +10,7 @@ export const About = () => {
       >
         <div className="flex flex-row justify-start items-center">
           <h2>About</h2>
-          <span className="font-bold text-mainLightBlue text-[80px] md:text-[120px] ml-8">
+          <span className="font-bold text-mainLightBlue text-[60px] md:text-[100px] ml-8">
             &gt;
           </span>
         </div>

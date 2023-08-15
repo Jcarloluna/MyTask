@@ -1,14 +1,30 @@
 import { useMutation } from "@apollo/client";
-import { GET_TASK } from "../queries/getTaskQuery";
+import { GET_TASKS } from "../queries/getTasksQuery";
 import { UPDATE_TASK } from "../mutations/updateTaskMutation";
 
-export const useUpdateTaskMutation = (id, taskTitle, status) => {
-  const [updateTask, { loading, error, data }] = useMutation(UPDATE_TASK, {
-    variables: { id: id, taskTitle: taskTitle, status: status },
-    errorPolicy: "all",
-    skip: id === null,
-    refetchQueries: [{ query: GET_TASK, variables: { id: id } }],
-  });
+export const useUpdateTaskMutation = () => {
+  const [callback, { loading, error, data }] = useMutation(UPDATE_TASK);
+
+  const updateTask = (
+    id,
+    taskTitle,
+    taskDescription,
+    taskStatus,
+    taskPriority
+  ) => {
+    return callback({
+      variables: {
+        id: id,
+        taskTitle: taskTitle,
+        taskDescription: taskDescription,
+        status: taskStatus,
+        priority: taskPriority,
+      },
+      errorPolicy: "all",
+      skip: id === null,
+      refetchQueries: [{ query: GET_TASKS }],
+    });
+  };
 
   return {
     updateTask,

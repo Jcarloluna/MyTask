@@ -21,7 +21,9 @@ export const TaskCard = ({ task }) => {
     dispatch(taskModalActions.toggleTaskModal(true));
     dispatch(formTaskActions.setTaskId(task.id));
     dispatch(formTaskActions.setTaskTitle(task.taskTitle));
+    dispatch(formTaskActions.setTaskDescription(task.taskDescription));
     dispatch(formTaskActions.setTaskStatus(task.status));
+    dispatch(formTaskActions.setTaskPriority(task.priority));
   };
 
   // TOOLTIP HANDLERS
