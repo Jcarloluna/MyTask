@@ -22,7 +22,7 @@ export const Dashboard = () => {
         }
       >
         <div className={"flex flex-row justify-start items-center"}>
-          <h3>Tasks List </h3>
+          <h3>Task List </h3>
           <span className="font-bold text-mainLightBlue text-[60px] md:text-[100px] ml-8">
             &gt;
           </span>

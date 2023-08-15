@@ -12,6 +12,8 @@ export const useUpdateTaskMutation = () => {
     taskStatus,
     taskPriority
   ) => {
+    console.log(taskStatus,"FROM MUTATIOOOON")
+    console.log(taskPriority,"FROM MUTATIOOOON")
     return callback({
       variables: {
         id: id,

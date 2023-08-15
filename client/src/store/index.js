@@ -5,6 +5,7 @@ import { TASK_STATUS_OPTIONS, TASK_PRIORITY_OPTIONS } from "../constants/tasks";
 const TO_DO = Object.keys(TASK_STATUS_OPTIONS).find(
   (key) => TASK_STATUS_OPTIONS[key] === "Not Started"
 );
+console.log('DEFAAAULt TODO', TO_DO)
 // Set the initial value of task priority option to the key of 'To do'
 const LOW = Object.keys(TASK_PRIORITY_OPTIONS).find(
   (key) => TASK_PRIORITY_OPTIONS[key] === "Low Priority"
@@ -37,13 +38,16 @@ const formTaskSlice = createSlice({
       const KEY = Object.keys(TASK_STATUS_OPTIONS).find(
         (key) => TASK_STATUS_OPTIONS[key] === action.payload
       );
-      state.taskStatus = KEY;
+      console.log(KEY,'keystats')
+
+      state.taskStatus = action.payload;
     },
     setTaskPriority: (state, action) => {
       const KEY = Object.keys(TASK_PRIORITY_OPTIONS).find(
         (key) => TASK_PRIORITY_OPTIONS[key] === action.payload
       );
-      state.taskPriority = KEY;
+      console.log(KEY,'keyprio')
+      state.taskPriority = action.payload;
     },
     setTaskId: (state, action) => {
       state.taskId = action.payload;

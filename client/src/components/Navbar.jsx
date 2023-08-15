@@ -8,7 +8,6 @@ import { useState, useEffect } from "react";
 import { FaBarsStaggered, FaXmark } from "react-icons/fa6";
 import myTaskLogo from "../assets/myTaskLogo.svg";
 
-
 export const Navbar = () => {
   const dispatch = useDispatch();
   const path = useLocation();
@@ -58,7 +57,7 @@ export const Navbar = () => {
        }`}
     >
       <div className="flex flex-row justify-center items-center gap-2">
-        <img src={myTaskLogo} alt="MyTaskLogo" className="h-[50px]"/>
+        <img src={myTaskLogo} alt="MyTaskLogo" className="h-[50px]" />
         <h1
           className={`hidden sm:flex text-shadow duration-300 ease-in-out  ${
             shadow

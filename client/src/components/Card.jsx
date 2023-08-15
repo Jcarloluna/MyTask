@@ -6,7 +6,7 @@ import { HiFlag } from "react-icons/hi";
 import { GrStatusGoodSmall } from "react-icons/gr";
 import { FiEdit } from "react-icons/fi";
 import { MdDelete } from "react-icons/md";
-import { TASK_STATUS_OPTIONS } from "../constants/tasks";
+import { TASK_STATUS_OPTIONS, TASK_PRIORITY_OPTIONS } from "../constants/tasks";
 import moment from "moment";
 
 export const TaskCard = ({ task }) => {
@@ -17,13 +17,22 @@ export const TaskCard = ({ task }) => {
 
   // EDIT TASK HANDLER
   const handleEditTask = () => {
+    // FIND KEY OF STATUS ONCLICK OF EDIT
+    const STATUS_KEY = Object.keys(TASK_STATUS_OPTIONS).find(
+      (key) => TASK_STATUS_OPTIONS[key] === task.status
+    );
+    // FIND KEY OF PRIORITY ONCLICK OF EDIT
+    const PRIO_KEY = Object.keys(TASK_PRIORITY_OPTIONS).find(
+      (key) => TASK_PRIORITY_OPTIONS[key] === task.priority
+    );
+    
     dispatch(taskModalActions.setModalType("EDIT"));
     dispatch(taskModalActions.toggleTaskModal(true));
     dispatch(formTaskActions.setTaskId(task.id));
     dispatch(formTaskActions.setTaskTitle(task.taskTitle));
     dispatch(formTaskActions.setTaskDescription(task.taskDescription));
-    dispatch(formTaskActions.setTaskStatus(task.status));
-    dispatch(formTaskActions.setTaskPriority(task.priority));
+    dispatch(formTaskActions.setTaskStatus(STATUS_KEY));
+    dispatch(formTaskActions.setTaskPriority(PRIO_KEY));
   };
 
   // TOOLTIP HANDLERS
@@ -89,7 +98,7 @@ export const TaskCard = ({ task }) => {
       : formattedDateCreated;
 
   return (
-    <div className="relative min-h-[75px] h-auto w-[90vw] md:w-[80vw]">
+    <div className="relative min-h-[75px] h-auto w-[90vw] md:w-[80vw] rounded-[25px]">
       <div className="absolute h-[100%] w-[100%] rounded-[25px] bg-mainLightBlue translate-y-1 -translate-x-1" />
       <div
         className={
@@ -117,7 +126,7 @@ export const TaskCard = ({ task }) => {
             </button>
             <button
               className={
-                "rounded-full bg-[#E72323] p-3 text-mainWhite hover:-translate-y-[2px] duration-150"
+                "rounded-full bg-mainDarkBlue p-3 text-mainWhite hover:-translate-y-[2px] duration-150"
               }
             >
               <MdDelete className="text-[16px] md:text-[18px] lg:text-[25px]" />

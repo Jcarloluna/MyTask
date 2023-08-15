@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { taskModalActions, formTaskActions } from "../store";
 import { useUpdateTaskMutation } from "../hooks/useUpdateTaskMutation";
 import { useAddTaskMutation } from "../hooks/useAddTaskMutation";
+import { FiEdit } from "react-icons/fi";
 import {
   TASK_STATUS_OPTIONS,
   MODAL_TYPE,
@@ -22,7 +23,7 @@ export const Modal = (props) => {
       taskPriority,
       taskId
     );
-  }, [taskTitle, taskStatus, taskId]);
+  }, [taskTitle, taskDescription, taskStatus, taskPriority, taskId]);
   const modalType = useSelector((state) => state.taskModal.modalType);
   const { addTask } = useAddTaskMutation();
   const { updateTask } = useUpdateTaskMutation();
@@ -35,6 +36,14 @@ export const Modal = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(
+      "DDDDDDDDDDDDDDDDD",
+      taskId,
+      taskTitle,
+      taskDescription,
+      taskStatus,
+      taskPriority
+    );
     if (modalType === MODAL_TYPE.EDIT) {
       updateTask(taskId, taskTitle, taskDescription, taskStatus, taskPriority);
     }
@@ -52,15 +61,18 @@ export const Modal = (props) => {
     switch (name) {
       case "taskTitle":
         dispatch(formTaskActions.setTaskTitle(value));
+
         break;
       case "taskDescription":
         dispatch(formTaskActions.setTaskDescription(value));
         break;
       case "taskStatus":
         dispatch(formTaskActions.setTaskStatus(value));
+        console.log("statuschange", value);
         break;
       case "taskPriority":
         dispatch(formTaskActions.setTaskPriority(value));
+        console.log("priochange", value);
         break;
       default:
         break;
@@ -73,10 +85,13 @@ export const Modal = (props) => {
       // onClick={handleCloseModal}
     >
       <div
-        className="bg-white w-96 rounded-lg " /*{onClick={(e) => e.stopPropagation()}*/
+        className="bg-white lg:w-[60%] md:w-[70%] w-[90%] rounded-[15px] border-[3px] border-mainLightBlue" /*{onClick={(e) => e.stopPropagation()}*/
       >
-        <div className="px-5 py-3 bg-mainLightBlue text-white flex justify-between items-center">
-          <h3 className="text-lg font-semibold">{props.modalTitle}</h3>
+        <div className="px-5 py-3 bg-mainLightBlue text-white flex justify-between items-center rounded-[15px] w-[90%] mx-[5%] -translate-y-7">
+          <h3 className="text-lg font-semibold flex gap-2 items-center justify-center">
+            <FiEdit />
+            {props.modalTitle}
+          </h3>
           <span
             className="text-3xl cursor-pointer hover:scale-[1.1] hover:-translate-y-[1px] duration-75 active:scale-[.90]"
             onClick={handleCloseModal}
@@ -96,7 +111,7 @@ export const Modal = (props) => {
                 name="taskTitle"
                 id="taskTitle"
                 onChange={handleChange}
-                className="w-full border border-gray-300 px-3 py-2 rounded-sm focus:ring focus:ring-blue-500"
+                className="w-full border border-mainDarkBlue px-3 py-2 rounded-[5px]"
               />
             </div>
             <div>
@@ -113,7 +128,7 @@ export const Modal = (props) => {
                 name="taskDescription"
                 id="taskDescription"
                 onChange={handleChange}
-                className="w-full border border-gray-300 px-3 py-2 rounded-sm focus:ring focus:ring-blue-500"
+                className="w-full border border-mainDarkBlue px-3 py-2 rounded-[5px]  "
               />
             </div>
             <div>
@@ -125,7 +140,7 @@ export const Modal = (props) => {
                 name="taskStatus"
                 value={taskStatus}
                 onChange={handleChange}
-                className="w-full border border-gray-300 px-3 py-2 rounded-sm focus:ring focus:ring-blue-500"
+                className="w-full border border-mainDarkBlue px-3 py-2 rounded-[5px]  "
               >
                 {Object.keys(TASK_STATUS_OPTIONS).map((key) => (
                   <option key={key} value={key}>
@@ -146,7 +161,7 @@ export const Modal = (props) => {
                 name="taskPriority"
                 value={taskPriority}
                 onChange={handleChange}
-                className="w-full border border-gray-300 px-3 py-2 rounded-sm focus:ring focus:ring-blue-500"
+                className="w-full border border-mainDarkBlue px-3 py-2 rounded-[5px]  "
               >
                 {Object.keys(TASK_PRIORITY_OPTIONS).map((key) => (
                   <option key={key} value={key}>
@@ -159,13 +174,13 @@ export const Modal = (props) => {
           <div className="flex justify-end mt-4">
             <button
               type="submit"
-              className="px-4 py-2 bg-blue-500 text-white rounded-sm hover:bg-blue-600"
+              className="px-4 py-2 bg-mainLightBlue text-white hover:-translate-y-[2px] rounded-[5px] duration-75 "
             >
               Save
             </button>
             <button
               type="button"
-              className="px-4 py-2 ml-2 bg-gray-300 text-gray-700 rounded-sm hover:bg-gray-400"
+              className="px-4 py-2 ml-2 bg-mainDarkBlue text-white hover:-translate-y-[2px] rounded-[5px]  "
               onClick={handleCloseModal}
             >
               Close
