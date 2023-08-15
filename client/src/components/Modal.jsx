@@ -4,8 +4,8 @@ import { taskModalActions, formTaskActions } from "../store";
 import { useUpdateTaskMutation } from "../hooks/useUpdateTaskMutation";
 import { useAddTaskMutation } from "../hooks/useAddTaskMutation";
 import { useDateDifference } from "../hooks/useDateDifference";
-
-import { FiEdit } from "react-icons/fi";
+import { MdDelete } from "react-icons/md";
+import { FiEdit, FiPlusCircle } from "react-icons/fi";
 import {
   TASK_STATUS_OPTIONS,
   MODAL_TYPE,
@@ -13,7 +13,6 @@ import {
 } from "../constants/tasks";
 
 export const Modal = (props) => {
-  const userId = "64cdb4431101c196fb05e8fc"; //Temporary user id
   const {
     taskTitle,
     taskDescription,
@@ -31,23 +30,16 @@ export const Modal = (props) => {
   const handleCloseModal = () => {
     dispatch(taskModalActions.toggleTaskModal(false));
     dispatch(taskModalActions.setModalType(null));
+    dispatch(formTaskActions.clearForm());
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(
-      "DDDDDDDDDDDDDDDDD",
-      taskId,
-      taskTitle,
-      taskDescription,
-      taskStatus,
-      taskPriority
-    );
     if (modalType === MODAL_TYPE.EDIT) {
       updateTask(taskId, taskTitle, taskDescription, taskStatus, taskPriority);
     }
     if (modalType === MODAL_TYPE.ADD) {
-      addTask(userId, taskTitle, taskStatus);
+      addTask(taskTitle, taskDescription, taskStatus, taskPriority);
     }
 
     dispatch(formTaskActions.clearForm());
@@ -88,8 +80,21 @@ export const Modal = (props) => {
       >
         <div className="px-5 py-3 bg-mainLightBlue text-white flex justify-between items-center rounded-[15px] w-[90%] mx-[5%] -translate-y-7">
           <h3 className="text-lg font-semibold flex gap-2 items-center justify-center">
-            <FiEdit />
-            {props.modalTitle}
+            {modalType === MODAL_TYPE.EDIT ? (
+              <>
+                <FiEdit /> Update Task
+              </>
+            ) : modalType === MODAL_TYPE.ADD ? (
+              <>
+                <FiPlusCircle /> Add Task
+              </>
+            ) : modalType === MODAL_TYPE.DELETE ? (
+              <>
+                <MdDelete /> Add Task
+              </>
+            ) : (
+              ""
+            )}
           </h3>
           <span
             className="text-3xl cursor-pointer hover:scale-[1.1] hover:-translate-y-[1px] duration-75 active:scale-[.90]"
@@ -170,7 +175,7 @@ export const Modal = (props) => {
               </select>
             </div>
           </div>
-          <div className="flex justify-between mt-4">
+          <div className="flex justify-between mt-8">
             <div className="text-gray-500 text-[15px] flex items-center justify-center">
               Last saved/edited {convertedDate}
             </div>
