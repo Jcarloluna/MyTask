@@ -3,6 +3,7 @@ import { formTaskActions, taskModalActions } from "../store";
 import { useDispatch, useSelector } from "react-redux";
 import { useUpdateTaskMutation } from "../hooks/useUpdateTaskMutation";
 import { useDeleteTaskMutation } from "../hooks/useDeleteTaskMutation";
+import { useDateDifference } from "../hooks/useDateDifference";
 import { HiFlag } from "react-icons/hi";
 import { GrStatusGoodSmall } from "react-icons/gr";
 import { FiEdit } from "react-icons/fi";
@@ -15,6 +16,7 @@ export const TaskCard = ({ task }) => {
   const [statusTooltipVisible, setStatusTooltipVisible] = useState(false);
   const modalType = useSelector((state) => state.taskModal.modalType);
   const { deleteTask, loading } = useDeleteTaskMutation();
+  const convertedDate = useDateDifference(task.dateCreated);
   const dispatch = useDispatch();
 
   const handleDeleteTask = () => {
@@ -38,6 +40,7 @@ export const TaskCard = ({ task }) => {
     dispatch(formTaskActions.setTaskDescription(task.taskDescription));
     dispatch(formTaskActions.setTaskStatus(STATUS_KEY));
     dispatch(formTaskActions.setTaskPriority(PRIO_KEY));
+    dispatch(formTaskActions.setDateCreated(task.dateCreated));
   };
 
   // TOOLTIP HANDLERS
@@ -73,35 +76,6 @@ export const TaskCard = ({ task }) => {
       ? "#DFE328"
       : "#2EA523";
 
-  // Date Formats
-  const formattedDateCreated = moment(task.dateCreated).format("MMMM Do YYYY");
-  const dateCreatedDiff = moment().diff(moment(task.dateCreated));
-  const diffInSeconds = Math.floor(
-    moment.duration(dateCreatedDiff).asSeconds()
-  );
-  const diffInMinutes = Math.floor(
-    moment.duration(dateCreatedDiff).asMinutes()
-  );
-  const diffInHours = Math.floor(moment.duration(dateCreatedDiff).asHours());
-  const diffInDays = Math.floor(moment.duration(dateCreatedDiff).asDays());
-
-  const dateDisplay =
-    diffInSeconds < 60
-      ? diffInSeconds
-          .toString()
-          .concat(diffInSeconds > 1 ? " secs ago" : " sec ago")
-      : diffInMinutes < 60
-      ? diffInMinutes
-          .toString()
-          .concat(diffInMinutes > 1 ? " mins ago" : " min ago")
-      : diffInHours < 24
-      ? diffInHours
-          .toString()
-          .concat(diffInHours > 1 ? " hrs ago" : " hour ago")
-      : diffInDays < 30
-      ? diffInDays.toString().concat(diffInDays > 1 ? " days ago" : " day ago")
-      : formattedDateCreated;
-
   return (
     <div className="relative min-h-[75px] h-auto w-[90vw] md:w-[80vw] rounded-[25px]">
       <div className="absolute h-[100%] w-[100%] rounded-[25px] bg-mainLightBlue translate-y-1 -translate-x-1" />
@@ -118,7 +92,7 @@ export const TaskCard = ({ task }) => {
             {task.taskTitle}
           </h5>
           <h5 className="col-span-1 hidden md:flex justify-center items-center">
-            {dateDisplay}
+            {convertedDate}
           </h5>
           <div className="col-span-1 flex justify-center items-center gap-3 lg:gap-5">
             <button

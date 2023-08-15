@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { taskModalActions, formTaskActions } from "../store";
 import { useUpdateTaskMutation } from "../hooks/useUpdateTaskMutation";
 import { useAddTaskMutation } from "../hooks/useAddTaskMutation";
+import { useDateDifference } from "../hooks/useDateDifference";
+
 import { FiEdit } from "react-icons/fi";
 import {
   TASK_STATUS_OPTIONS,
@@ -12,18 +14,15 @@ import {
 
 export const Modal = (props) => {
   const userId = "64cdb4431101c196fb05e8fc"; //Temporary user id
-  const { taskTitle, taskDescription, taskStatus, taskPriority, taskId } =
-    useSelector((state) => state.formTask);
-  useEffect(() => {
-    console.log(
-      "from rtk",
-      taskTitle,
-      taskDescription,
-      taskStatus,
-      taskPriority,
-      taskId
-    );
-  }, [taskTitle, taskDescription, taskStatus, taskPriority, taskId]);
+  const {
+    taskTitle,
+    taskDescription,
+    taskStatus,
+    taskPriority,
+    taskId,
+    dateCreated,
+  } = useSelector((state) => state.formTask);
+  const convertedDate = useDateDifference(dateCreated);
   const modalType = useSelector((state) => state.taskModal.modalType);
   const { addTask } = useAddTaskMutation();
   const { updateTask } = useUpdateTaskMutation();
@@ -171,20 +170,25 @@ export const Modal = (props) => {
               </select>
             </div>
           </div>
-          <div className="flex justify-end mt-4">
-            <button
-              type="submit"
-              className="px-4 py-2 bg-mainLightBlue text-white hover:-translate-y-[2px] rounded-[5px] duration-75 "
-            >
-              Save
-            </button>
-            <button
-              type="button"
-              className="px-4 py-2 ml-2 bg-mainDarkBlue text-white hover:-translate-y-[2px] rounded-[5px]  "
-              onClick={handleCloseModal}
-            >
-              Close
-            </button>
+          <div className="flex justify-between mt-4">
+            <div className="text-gray-500 text-[15px] flex items-center justify-center">
+              Last saved/edited {convertedDate}
+            </div>
+            <div>
+              <button
+                type="submit"
+                className="px-4 py-2 bg-mainLightBlue text-white hover:-translate-y-[2px] rounded-[5px] duration-75 "
+              >
+                Save
+              </button>
+              <button
+                type="button"
+                className="px-4 py-2 ml-2 bg-mainDarkBlue text-white hover:-translate-y-[2px] rounded-[5px]  "
+                onClick={handleCloseModal}
+              >
+                Close
+              </button>
+            </div>
           </div>
         </form>
       </div>

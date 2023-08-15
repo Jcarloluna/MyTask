@@ -203,6 +203,7 @@ const mutation = new GraphQLObjectType({
         },
       },
       resolve(parent, args) {
+        const currentDate = moment().toDate();
         return Task.findByIdAndUpdate(
           args.id,
           {
@@ -211,7 +212,7 @@ const mutation = new GraphQLObjectType({
               taskDescription: args.taskDescription,
               status: args.status,
               priority: args.priority,
-              dateCreated: args.dateCreated,
+              dateCreated: currentDate,
             },
           },
           { new: true } // Returns the updated document -- prop of findByIdAndUpdate

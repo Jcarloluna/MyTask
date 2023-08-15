@@ -17,6 +17,7 @@ const initialFormState = {
   taskStatus: TO_DO,
   taskPriority: LOW,
   taskId: null,
+  dateCreated: ""
 };
 
 const initialModalState = {
@@ -49,6 +50,9 @@ const formTaskSlice = createSlice({
       console.log(KEY,'keyprio')
       state.taskPriority = action.payload;
     },
+    setDateCreated: (state,action)=>{
+      state.dateCreated = action.payload;
+    } ,
     setTaskId: (state, action) => {
       state.taskId = action.payload;
     },
@@ -57,6 +61,7 @@ const formTaskSlice = createSlice({
       state.taskDescription = "";
       state.taskPriority = LOW;
       state.taskStatus = TO_DO;
+      state.dateCreated = "";
       state.taskId = null;
     },
   },
