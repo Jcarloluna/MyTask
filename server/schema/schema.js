@@ -58,6 +58,7 @@ const RootQuery = new GraphQLObjectType({
           // Format the dateCreated field for each task
           return tasks.map((task) => ({
             ...task.toObject(),
+            id: task.id.toString(), // Convert _id to string
             dateCreated: moment(task.dateCreated).format("YYYY-MM-DD HH:mm:ss"),
           }));
         });

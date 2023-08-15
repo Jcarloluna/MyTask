@@ -15,6 +15,7 @@ export const TaskCard = ({ task }) => {
   const modalType = useSelector((state) => state.taskModal.modalType);
   const dispatch = useDispatch();
 
+  // EDIT TASK HANDLER
   const handleEditTask = () => {
     dispatch(taskModalActions.setModalType("EDIT"));
     dispatch(taskModalActions.toggleTaskModal(true));
@@ -23,6 +24,7 @@ export const TaskCard = ({ task }) => {
     dispatch(formTaskActions.setTaskStatus(task.status));
   };
 
+  // TOOLTIP HANDLERS
   const handlePriorityTooltipEnter = () => {
     setPriorityTooltipVisible(true);
   };
@@ -69,13 +71,19 @@ export const TaskCard = ({ task }) => {
 
   const dateDisplay =
     diffInSeconds < 60
-      ? diffInSeconds + "secs ago"
+      ? diffInSeconds
+          .toString()
+          .concat(diffInSeconds > 1 ? " secs ago" : " sec ago")
       : diffInMinutes < 60
-      ? diffInMinutes + "mins ago"
+      ? diffInMinutes
+          .toString()
+          .concat(diffInMinutes > 1 ? " mins ago" : " min ago")
       : diffInHours < 24
-      ? diffInHours + "hrs ago"
+      ? diffInHours
+          .toString()
+          .concat(diffInHours > 1 ? " hrs ago" : " hour ago")
       : diffInDays < 30
-      ? diffInDays + "days ago"
+      ? diffInDays.toString().concat(diffInDays > 1 ? " days ago" : " day ago")
       : formattedDateCreated;
 
   return (

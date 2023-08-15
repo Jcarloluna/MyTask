@@ -12,7 +12,7 @@ export const Dashboard = () => {
   const { loading, error, data } = useGetTasksQuery();
   console.log(data, "data");
 
-  
+
 
   return (
     <>
@@ -28,7 +28,7 @@ export const Dashboard = () => {
           </span>
         </div>
         {loading && (
-          <div className="flex justify-center items-center scale-[2]">
+          <div className="flex justify-center min-h-[30vh] items-center scale-[2]">
             <Loading />
           </div>
         )}
