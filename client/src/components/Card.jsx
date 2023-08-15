@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { formTaskActions, taskModalActions } from "../store";
 import { useDispatch, useSelector } from "react-redux";
 import { useUpdateTaskMutation } from "../hooks/useUpdateTaskMutation";
+import { useDeleteTaskMutation } from "../hooks/useDeleteTaskMutation";
 import { HiFlag } from "react-icons/hi";
 import { GrStatusGoodSmall } from "react-icons/gr";
 import { FiEdit } from "react-icons/fi";
@@ -13,8 +14,12 @@ export const TaskCard = ({ task }) => {
   const [priorityTooltipVisible, setPriorityTooltipVisible] = useState(false);
   const [statusTooltipVisible, setStatusTooltipVisible] = useState(false);
   const modalType = useSelector((state) => state.taskModal.modalType);
+  const { deleteTask, loading } = useDeleteTaskMutation();
   const dispatch = useDispatch();
 
+  const handleDeleteTask = () => {
+    deleteTask(task.id);
+  };
   // EDIT TASK HANDLER
   const handleEditTask = () => {
     // FIND KEY OF STATUS ONCLICK OF EDIT
@@ -25,7 +30,7 @@ export const TaskCard = ({ task }) => {
     const PRIO_KEY = Object.keys(TASK_PRIORITY_OPTIONS).find(
       (key) => TASK_PRIORITY_OPTIONS[key] === task.priority
     );
-    
+
     dispatch(taskModalActions.setModalType("EDIT"));
     dispatch(taskModalActions.toggleTaskModal(true));
     dispatch(formTaskActions.setTaskId(task.id));
@@ -128,6 +133,7 @@ export const TaskCard = ({ task }) => {
               className={
                 "rounded-full bg-mainDarkBlue p-3 text-mainWhite hover:-translate-y-[2px] duration-150"
               }
+              onClick={handleDeleteTask}
             >
               <MdDelete className="text-[16px] md:text-[18px] lg:text-[25px]" />
             </button>
