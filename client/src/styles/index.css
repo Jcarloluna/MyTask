@@ -30,27 +30,26 @@
   }
 
   h1 {
-    @apply text-4xl sm:text-6xl lg:text-[68px] font-bold text-shadow tracking-wide;
+    @apply text-3xl sm:text-5xl lg:text-[60px] font-bold text-shadow tracking-wide;
   }
   h2 {
-    @apply text-2xl sm:text-4xl lg:text-5xl;
+    @apply text-xl sm:text-3xl lg:text-4xl;
   }
 
   h3 {
-    @apply text-xl sm:text-2xl lg:text-3xl;
+    @apply text-lg sm:text-xl lg:text-2xl;
   }
 
   h4 {
-    @apply text-lg sm:text-xl lg:text-2xl;
+    @apply text-base  sm:text-lg lg:text-xl;
   }
   h5 {
-    @apply text-base sm:text-lg lg:text-xl;
+    @apply text-sm sm:text-base md:text-lg;
   }
 
   p {
     @apply lg:text-[24px] sm:text-[20px] text-[16px] px-2 overflow-clip;
   }
-
 }
 
 /* Custom Scrollbar */
@@ -81,6 +80,6 @@ button:hover {
   font-weight: 900;
 }
 
-.navlink:hover{
+.navlink:hover {
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }

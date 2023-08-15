@@ -7,6 +7,7 @@ import { GrStatusGoodSmall } from "react-icons/gr";
 import { FiEdit } from "react-icons/fi";
 import { MdDelete } from "react-icons/md";
 import { TASK_STATUS_OPTIONS } from "../constants/tasks";
+import moment from "moment";
 
 export const TaskCard = ({ task }) => {
   const [priorityTooltipVisible, setPriorityTooltipVisible] = useState(false);
@@ -54,6 +55,29 @@ export const TaskCard = ({ task }) => {
       ? "#DFE328"
       : "#2EA523";
 
+  // Date Formats
+  const formattedDateCreated = moment(task.dateCreated).format("MMMM Do YYYY");
+  const dateCreatedDiff = moment().diff(moment(task.dateCreated));
+  const diffInSeconds = Math.floor(
+    moment.duration(dateCreatedDiff).asSeconds()
+  );
+  const diffInMinutes = Math.floor(
+    moment.duration(dateCreatedDiff).asMinutes()
+  );
+  const diffInHours = Math.floor(moment.duration(dateCreatedDiff).asHours());
+  const diffInDays = Math.floor(moment.duration(dateCreatedDiff).asDays());
+
+  const dateDisplay =
+    diffInSeconds < 60
+      ? diffInSeconds + "secs ago"
+      : diffInMinutes < 60
+      ? diffInMinutes + "mins ago"
+      : diffInHours < 24
+      ? diffInHours + "hrs ago"
+      : diffInDays < 30
+      ? diffInDays + "days ago"
+      : formattedDateCreated;
+
   return (
     <div className="relative min-h-[75px] h-auto w-[90vw] md:w-[80vw]">
       <div className="absolute h-[100%] w-[100%] rounded-[25px] bg-mainLightBlue translate-y-1 -translate-x-1" />
@@ -63,17 +87,29 @@ export const TaskCard = ({ task }) => {
         }
       >
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center items-center w-[100%] px-12 md:px-16">
-          <h5 className="col-span-1 hidden lg:flex">{task.status}</h5>
-          <h5 className="col-span-1">{task.taskTitle}</h5>
-          <h5 className="col-span-1 hidden md:flex">{task.dateCreated}</h5>
+          <h5 className="col-span-1 hidden lg:flex  justify-center items-center">
+            {task.status}
+          </h5>
+          <h5 className="col-span-1 flex justify-center items-center">
+            {task.taskTitle}
+          </h5>
+          <h5 className="col-span-1 hidden md:flex justify-center items-center">
+            {dateDisplay}
+          </h5>
           <div className="col-span-1 flex justify-center items-center gap-3 lg:gap-5">
             <button
-              className={"rounded-full bg-mainLightBlue p-3 text-mainWhite"}
+              className={
+                "rounded-full bg-mainLightBlue p-3 text-mainWhite hover:-translate-y-[2px] duration-150"
+              }
               onClick={handleEditTask}
             >
               <FiEdit className="text-[16px] md:text-[18px] lg:text-[25px]" />
             </button>
-            <button className={"rounded-full bg-[#E72323] p-3 text-mainWhite"}>
+            <button
+              className={
+                "rounded-full bg-[#E72323] p-3 text-mainWhite hover:-translate-y-[2px] duration-150"
+              }
+            >
               <MdDelete className="text-[16px] md:text-[18px] lg:text-[25px]" />
             </button>
           </div>

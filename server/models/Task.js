@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const moment = require('moment')
 
 const TaskSchema = new mongoose.Schema({
   taskTitle: {
@@ -21,7 +22,7 @@ const TaskSchema = new mongoose.Schema({
   },
   dateCreated: {
     type: Date,
-    default: Date.now,
+    default: moment().toDate(),
   },
 });
 

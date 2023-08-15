@@ -164,7 +164,7 @@ export const Navbar = () => {
             </NavLink>
           </li>
           <li className={linkStyles}>
-            <Link to={"/sign-in"} onClick={handleBurgerClick}>
+            <Link to={"/dashboard"} onClick={handleBurgerClick}>
               Sign in
             </Link>
           </li>

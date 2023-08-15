@@ -1,6 +1,8 @@
 // Mongoose Models
 const User = require("../models/User.js");
 const Task = require("../models/Task.js");
+// Momentjs
+const moment = require("moment");
 
 const {
   GraphQLObjectType,
@@ -52,7 +54,13 @@ const RootQuery = new GraphQLObjectType({
     tasks: {
       type: new GraphQLList(TaskType),
       resolve(parent, args) {
-        return Task.find();
+        return Task.find().then((tasks) => {
+          // Format the dateCreated field for each task
+          return tasks.map((task) => ({
+            ...task.toObject(),
+            dateCreated: moment(task.dateCreated).format("YYYY-MM-DD HH:mm:ss"),
+          }));
+        });
       },
     },
     task: {
